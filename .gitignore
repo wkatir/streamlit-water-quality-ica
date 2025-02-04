@@ -7,51 +7,175 @@ __pycache__/
 *.so
 
 # Distribution / packaging
-dist/
+.Python
 build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
 *.egg-info/
+.installed.cfg
 *.egg
+MANIFEST
 
-# Virtual environments
-venv/
-env/
-.env/
-.venv/
-ENV/
+# PyInstaller
+*.manifest
+*.spec
 
-# IDEs and editors
-.idea/
-.vscode/
-*.swp
-*.swo
-*.swn
-*.bak
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff
+instance/
+.webassets-cache
+
+# Scrapy stuff
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+.pybuilder/
+target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
 *.ipynb
 
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
-.tox/
-.nox/
+# IPython
+profile_default/
+ipython_config.py
 
-# Documentation
-docs/_build/
-site/
+# pyenv
+.python-version
 
-# Logs and databases
-*.log
-*.sqlite
-*.db
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
 
-# Local development settings
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
 .env
-.env.local
-.env.*.local
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# PyCharm/IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+.idea_modules/
+out/
+
+# VSCode
+.vscode/
+*.code-workspace
+.history/
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
 
 # System files
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+*.swn
+*.bak
+
+# Local development settings
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+
+# Database
+*.sqlite
+*.db
+*.sql
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Virtual environment
+pythonenv*
+
+# Poetry
+poetry.lock
+
+# Pipenv
+Pipfile.lock
+
+# Others
+*.pid
+*.seed
+*.pid.lock
