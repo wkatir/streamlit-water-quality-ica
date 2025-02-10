@@ -203,23 +203,84 @@ def main():
     Ingrese los valores de los parámetros medidos para obtener el índice de calidad del agua.
     """)
 
+    # Add session state initialization for all parameters
+    if 'initialized' not in st.session_state:
+        st.session_state.initialized = True
+        st.session_state.coliform = 0.0
+        st.session_state.ph = 0.0
+        st.session_state.dbo5 = 0.0
+        st.session_state.nitrates = 0.0
+        st.session_state.phosphates = 0.0
+        st.session_state.temp_change = 0.0
+        st.session_state.turbidity = 0.0
+        st.session_state.solids = 0.0
+        st.session_state.oxygen = 0.0
+
+    def reset_values():
+        st.session_state.coliform = 0.0
+        st.session_state.ph = 0.0
+        st.session_state.dbo5 = 0.0
+        st.session_state.nitrates = 0.0
+        st.session_state.phosphates = 0.0
+        st.session_state.temp_change = 0.0
+        st.session_state.turbidity = 0.0
+        st.session_state.solids = 0.0
+        st.session_state.oxygen = 0.0
+
     col1, col2 = st.columns(2)
 
     with col1:
         st.subheader("Parámetros de entrada")
-        coliform = st.number_input("Coliformes Fecales (NMP/100mL)", min_value=0.0, format="%.2f")
-        ph = st.number_input("pH (unidades)", min_value=0.0, max_value=14.0, format="%.2f")
-        dbo5 = st.number_input("DBO5 (mg/L)", min_value=0.0, format="%.2f")
-        nitrates = st.number_input("Nitratos (mg/L)", min_value=0.0, format="%.2f")
-        phosphates = st.number_input("Fosfatos (mg/L)", min_value=0.0, format="%.2f")
+        coliform = st.number_input("Coliformes Fecales (NMP/100mL)",
+                                   min_value=0.0,
+                                   format="%.2f",
+                                   key="coliform")
+        ph = st.number_input("pH (unidades)",
+                             min_value=0.0,
+                             max_value=14.0,
+                             format="%.2f",
+                             key="ph")
+        dbo5 = st.number_input("DBO5 (mg/L)",
+                               min_value=0.0,
+                               format="%.2f",
+                               key="dbo5")
+        nitrates = st.number_input("Nitratos (mg/L)",
+                                   min_value=0.0,
+                                   format="%.2f",
+                                   key="nitrates")
+        phosphates = st.number_input("Fosfatos (mg/L)",
+                                     min_value=0.0,
+                                     format="%.2f",
+                                     key="phosphates")
 
     with col2:
-        temp_change = st.number_input("Cambio de Temperatura (°C)", min_value=0.0, format="%.2f")
-        turbidity = st.number_input("Turbidez (NTU)", min_value=0.0, format="%.2f")
-        solids = st.number_input("Sólidos Disueltos Totales (mg/L)", min_value=0.0, format="%.2f")
-        oxygen = st.number_input("Oxígeno Disuelto (% saturación)", min_value=0.0, format="%.2f")
+        temp_change = st.number_input("Cambio de Temperatura (°C)",
+                                      min_value=-50.0,  # Allow negative values
+                                      format="%.2f",
+                                      key="temp_change")
+        turbidity = st.number_input("Turbidez (NTU)",
+                                    min_value=0.0,
+                                    format="%.2f",
+                                    key="turbidity")
+        solids = st.number_input("Sólidos Disueltos Totales (mg/L)",
+                                 min_value=0.0,
+                                 format="%.2f",
+                                 key="solids")
+        oxygen = st.number_input("Oxígeno Disuelto (% saturación)",
+                                 min_value=0.0,
+                                 format="%.2f",
+                                 key="oxygen")
 
-    if st.button("Calcular ICA"):
+    # Create a row of buttons using columns
+    button_col1, button_col2 = st.columns(2)
+
+    with button_col1:
+        calculate_button = st.button("Calcular ICA")
+
+    with button_col2:
+        reset_button = st.button("Limpiar Campos", on_click=reset_values)
+
+    if calculate_button:
         # Calculate sub-indices
         subs = {
             'Coliformes Fecales': (calculate_sub_coliform(coliform), 0.15),
@@ -227,7 +288,7 @@ def main():
             'DBO5': (calculate_sub_dbo5(dbo5), 0.10),
             'Nitratos': (calculate_sub_nitrates(nitrates), 0.10),
             'Fosfatos': (calculate_sub_phosphates(phosphates), 0.10),
-            'Temperatura': (calculate_sub_temperature(temp_change), 0.10),
+            'Temperatura': (calculate_sub_temperature(abs(temp_change)), 0.10),
             'Turbidez': (calculate_sub_turbidity(turbidity), 0.08),
             'Sólidos Disueltos': (calculate_sub_solids(solids), 0.08),
             'Oxígeno Disuelto': (calculate_sub_oxygen(oxygen), 0.17)
