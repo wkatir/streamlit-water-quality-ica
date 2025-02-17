@@ -69,11 +69,17 @@ Activa el entorno virtual antes de instalar las dependencias:
   source venv/bin/activate
   ```
 
-### 5. Instalar las Dependencias
-Con el entorno virtual activado, instala las dependencias necesarias:
+### 5. Instalar las Dependencias desde `requirements.txt`
+Con el entorno virtual activado, instala las dependencias necesarias ejecutando:
 ```bash
-pip install streamlit pandas plotly
+pip install -r requirements.txt
 ```
+> **Nota:** Asegúrate de que el archivo `requirements.txt` incluya al menos las siguientes líneas:
+> ```txt
+> streamlit
+> pandas
+> plotly
+> ```
 
 ### 6. Ejecutar la Aplicación
 Finalmente, ejecuta la aplicación:
